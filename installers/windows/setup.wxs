@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <?include ver.wxi?>
+    <Product 
+        Id="*"
+        Name="Omm"
+        Language="1033"
+        Version="$(var.Version)"
+        Manufacturer="Omm"
+        UpgradeCode="d38d60c2-d01b-4f58-ae40-3e0067ae3656"
+    >
+        <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+        <Media Id="1" Cabinet="_.cab" EmbedCab="yes" />
+
+        <CustomAction 
+            Id="unzip"
+            ExeCommand="[INSTALLDIR]load.bat"
+            Directory="INSTALLDIR"
+            Impersonate='no'
+            Return='ignore'
+            Execute='deferred'
+        />
+        <CustomAction 
+            Id="clean" 
+            ExeCommand="[INSTALLDIR]uninstall.bat"
+            Directory="INSTALLDIR"
+            Impersonate="no"
+            Return="ignore" 
+            Execute='deferred'
+        />
+
+        <InstallExecuteSequence>
+            <RemoveExistingProducts After='InstallFinalize' />
+            <Custom Action="unzip" After="InstallFiles">
+                NOT (REMOVE~="ALL")
+            </Custom>
+            <Custom Action="clean" Before="RemoveFiles" >
+                REMOVE="ALL"
+            </Custom>
+        </InstallExecuteSequence>
+
+        <WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
+        <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="background.bmp" />
+        <UI Id="OmmSetup">
+            <UIRef Id="WixUI_Mondo" />
+            <UIRef Id="WixUI_ErrorProgressText" />
+
+            <DialogRef Id="ErrorDlg" />
+            <DialogRef Id="FatalError" />
+            <DialogRef Id="FilesInUse" />
+            <DialogRef Id="MsiRMFilesInUse" />
+            <DialogRef Id="PrepareDlg" />
+            <DialogRef Id="ProgressDlg" />
+            <DialogRef Id="ResumeDlg" />
+            <DialogRef Id="UserExit" />
+            <DialogRef Id="WelcomeDlg" />
+            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="PrepareDlg" Order="0" />
+            <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg" Order="1">LicenseAccepted = "1"</Publish>
+            <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="2" />
+            <Property Id="ARPNOMODIFY" Value="1" />
+        </UI>
+        <UIRef Id="WixUI_Common" />
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="INSTALLDIR" Name="Omm" />
+        </Directory>
+
+        <DirectoryRef Id="TARGETDIR">
+            <Component Id="env" Guid="e2bed217-4fc1-497c-b029-8d0de51a1531">
+                <Environment Id="PATH" Name="PATH" Value="[INSTALLDIR]" Permanent="yes" Part="last" Action="set" System="yes" />
+            </Component>
+        </DirectoryRef>
+
+        <DirectoryRef Id="INSTALLDIR">
+            <Component Id="raw" Guid="1d4b0c12-b319-4323-83b7-f968f61566f7">
+                <File Id="raw.zip" Source="raw.zip" />
+                <File Id="load.bat" Source="load.bat" />
+                <File Id="uninstall.bat" Source="uninstall.bat" />
+            </Component>
+        </DirectoryRef>
+
+        <Feature Id="Omm" Title="Omm" Level="1">
+            <ComponentRef Id="env" />
+            <ComponentRef Id="raw" />
+        </Feature>
+
+    </Product>
+</Wix>
