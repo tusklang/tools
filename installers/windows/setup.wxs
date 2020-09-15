@@ -3,10 +3,10 @@
     <?include ver.wxi?>
     <Product 
         Id="*"
-        Name="Omm"
+        Name="Ka"
         Language="1033"
         Version="$(var.Version)"
-        Manufacturer="Omm"
+        Manufacturer="Ka"
         UpgradeCode="d38d60c2-d01b-4f58-ae40-3e0067ae3656"
     >
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
@@ -42,7 +42,7 @@
         <WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
         <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
         <WixVariable Id="WixUIDialogBmp" Value="background.bmp" />
-        <UI Id="OmmSetup">
+        <UI Id="KaSetup">
             <UIRef Id="WixUI_Mondo" />
             <UIRef Id="WixUI_ErrorProgressText" />
 
@@ -63,7 +63,7 @@
         <UIRef Id="WixUI_Common" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="INSTALLDIR" Name="Omm" />
+            <Directory Id="INSTALLDIR" Name="Ka" />
         </Directory>
 
         <DirectoryRef Id="TARGETDIR">
@@ -80,7 +80,7 @@
             </Component>
         </DirectoryRef>
 
-        <Feature Id="Omm" Title="Omm" Level="1">
+        <Feature Id="Ka" Title="Ka" Level="1">
             <ComponentRef Id="env" />
             <ComponentRef Id="raw" />
         </Feature>

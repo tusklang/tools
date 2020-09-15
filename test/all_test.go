@@ -1,15 +1,14 @@
-package ommtest
+package katest
 
-//this is the test suite for omm
+//this is the test suite for kore
 
 import (
 	"testing"
 
 	_ "goat"
-	_ "omm/lang/compiler"
-	_ "omm/lang/interpreter"
-	_ "omm/lang/types"
-	_ "omm/native"
+	_ "ka/lang/compiler"
+	_ "ka/lang/interpreter"
+	_ "ka/lang/types"
 	_ "undra/server"
 )
 

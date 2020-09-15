@@ -1,4 +1,4 @@
-package suite
+package kore
 
 import (
 	"flag"
@@ -6,15 +6,15 @@ import (
 )
 
 const (
-	//OmmSuiteMajor is the major version of the Omm suite
-	OmmSuiteMajor = 0
-	//OmmSuiteMinor is the minor version of the Omm suite
-	OmmSuiteMinor = 0
-	//OmmSuiteBug is the bug version of the Omm suite
-	OmmSuiteBug = 0
+	//KoreMajor is the major version of the Ka suite
+	KoreMajor = 0
+	//KoreMinor is the minor version of the Ka suite
+	KoreMinor = 0
+	//KoreBug is the bug version of the Ka suite
+	KoreBug = 0
 )
 
-//Usagef is the default Usage message in the golang "flag" package, but instead it prints the Omm addon name, instead of the executable
+//Usagef is the default Usage message in the golang "flag" package, but instead it prints the Ka addon name, instead of the executable
 func Usagef(addon string) func() {
 	//set a custom "Usage of ..." message
 	return func() {
