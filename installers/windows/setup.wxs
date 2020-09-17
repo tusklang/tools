@@ -3,10 +3,10 @@
     <?include ver.wxi?>
     <Product 
         Id="*"
-        Name="Ka"
+        Name="Tusk"
         Language="1033"
         Version="$(var.Version)"
-        Manufacturer="Ka"
+        Manufacturer="Tusk"
         UpgradeCode="d38d60c2-d01b-4f58-ae40-3e0067ae3656"
     >
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
@@ -42,7 +42,7 @@
         <WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
         <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
         <WixVariable Id="WixUIDialogBmp" Value="background.bmp" />
-        <UI Id="KaSetup">
+        <UI Id="TuskSetup">
             <UIRef Id="WixUI_Mondo" />
             <UIRef Id="WixUI_ErrorProgressText" />
 
@@ -63,7 +63,7 @@
         <UIRef Id="WixUI_Common" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="INSTALLDIR" Name="Ka" />
+            <Directory Id="INSTALLDIR" Name="Tusk" />
         </Directory>
 
         <DirectoryRef Id="TARGETDIR">
@@ -80,7 +80,7 @@
             </Component>
         </DirectoryRef>
 
-        <Feature Id="Ka" Title="Ka" Level="1">
+        <Feature Id="Tusk" Title="Tusk" Level="1">
             <ComponentRef Id="env" />
             <ComponentRef Id="raw" />
         </Feature>

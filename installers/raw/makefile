@@ -14,7 +14,7 @@ all: omm_all oat_all undra_all
 
 .PHONY: omm_all
 omm_all:
-	$(LEAVEDIR)ka && $(MAKE) all
+	$(LEAVEDIR)tusk && $(MAKE) all
 
 .PHONY: oat_all
 oat_all:
@@ -30,7 +30,7 @@ clean: omm_clean oat_clean undra_clean
 
 .PHONY: omm_clean
 omm_clean:
-	-$(LEAVEDIR)ka && $(MAKE) clean
+	-$(LEAVEDIR)tusk && $(MAKE) clean
 
 .PHONY: oat_clean
 oat_clean:

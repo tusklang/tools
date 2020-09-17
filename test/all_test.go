@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	_ "goat"
-	_ "ka/lang/compiler"
-	_ "ka/lang/interpreter"
-	_ "ka/lang/types"
+	_ "tusk/lang/compiler"
+	_ "tusk/lang/interpreter"
+	_ "tusk/lang/types"
 	_ "undra/server"
 )
 

@@ -2,7 +2,7 @@
 *.wixobj
 *wixpdb
 *.zip
-/installers/windows/Ka/
+/installers/windows/Tusk/
 setup.wixproj.FileList.txt
 *.wxs
 !setup.wxs

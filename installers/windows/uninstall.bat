@@ -1,7 +1,7 @@
-rem remove the ka folder from the goroot (if they have one)
+rem remove the tusk folder from the goroot (if they have one)
 if "%GOROOT%" NEQ "" (
-    del %GOROOT%/src/ka /q
+    del %GOROOT%/src/tusk /q
 )
 
-@RD /S /Q .\
-del ..\Ka /q
+@rd /S /Q .\
+del ..\Tusk /q
