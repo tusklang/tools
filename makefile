@@ -1,7 +1,8 @@
-GOPATH = $(CURDIR)/../../
+GOPATH = $(CURDIR)/../../../../
 
 .PHONY: test
-test: go.mod
+test:
+	cd ../tusk && $(MAKE)
+	cd ../oat && $(MAKE)
+	cd ../undra && $(MAKE)
 	go test ./test/all_test.go -run ''
-
-go.mod:

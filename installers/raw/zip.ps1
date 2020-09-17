@@ -2,7 +2,7 @@
 
 $binhash = @{}
 
-$binhash.Add("omm_start.exe", "../../../omm/omm_start.exe")
+$binhash.Add("tusk_start.exe", "../../../tusktusk_start.exe")
 $binhash.Add("undra_start.exe", "../../../undra/undra_start.exe")
 $binhash.Add("oat_start.exe", "../../../oat/oat_start.exe")
 
@@ -21,10 +21,10 @@ $compress = @{
 
 make clean
 $compress.Path += "../../../"
-$compress.Path += "../../../omm/ommstd"
+$compress.Path += "../../../tuskommstd"
 $compress.Path += "../../../undra/undrastd"
 $compress.Path += "../../../undra/undra.ps1"
-$compress.Path += "../../../omm/omm.ps1"
+$compress.Path += "../../../tuskomm.ps1"
 $compress.Path += "../../../oat/oat.ps1"
 
 Compress-Archive @compress

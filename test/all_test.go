@@ -5,11 +5,11 @@ package katest
 import (
 	"testing"
 
-	_ "goat"
-	_ "tusk/lang/compiler"
-	_ "tusk/lang/interpreter"
-	_ "tusk/lang/types"
-	_ "undra/server"
+	_ "github.com/tusklang/goat"
+	_ "github.com/tusklang/tusk/lang/compiler"
+	_ "github.com/tusklang/tusk/lang/interpreter"
+	_ "github.com/tusklang/tusk/lang/types"
+	_ "github.com/tusklang/undra/server"
 )
 
 func TestAll(t *testing.T) {

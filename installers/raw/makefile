@@ -9,11 +9,11 @@ endif
 LEAVEDIR = cd ../../../
 
 .PHONY: all
-all: omm_all oat_all undra_all
+all: tusk_all oat_all undra_all
 	-$(ZIPALL)
 
-.PHONY: omm_all
-omm_all:
+.PHONY: tusk_all
+tusk_all:
 	$(LEAVEDIR)tusk && $(MAKE) all
 
 .PHONY: oat_all
@@ -25,11 +25,11 @@ undra_all:
 	$(LEAVEDIR)undra && $(MAKE) all
 
 .PHONY: clean
-clean: omm_clean oat_clean undra_clean
+clean: tusk_clean oat_clean undra_clean
 	-$(CLEAN) raw.zip
 
-.PHONY: omm_clean
-omm_clean:
+.PHONY: tusk_clean
+tusk_clean:
 	-$(LEAVEDIR)tusk && $(MAKE) clean
 
 .PHONY: oat_clean
