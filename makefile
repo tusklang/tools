@@ -2,11 +2,11 @@ GOPATH = $(CURDIR)/../../../../
 
 .PHONY: test
 test: go.mod
+	go get -u
 	cd ../tusk && $(MAKE)
 	cd ../oat && $(MAKE)
 	cd ../undra && $(MAKE)
 	cd ../goat && $(MAKE)
-	go get -u
 	go test ./test/all_test.go -run ''
 
 go.mod:
