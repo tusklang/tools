@@ -1,6 +1,6 @@
 package katest
 
-//this is the test suite for kore
+//this is the test suite for tools
 
 import (
 	"testing"
