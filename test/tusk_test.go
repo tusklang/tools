@@ -1,3 +1,3 @@
-package katest
+package tusktest
 
 //test tusk (language)

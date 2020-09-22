@@ -1,4 +1,4 @@
-package katest
+package tusktest
 
 //this is the test suite for tools
 
