@@ -6,10 +6,10 @@ import (
 	"testing"
 
 	_ "github.com/tusklang/goat"
-	_ "github.com/tusklang/tusk/lang/compiler"
-	_ "github.com/tusklang/tusk/lang/interpreter"
-	_ "github.com/tusklang/tusk/lang/types"
-	_ "github.com/tusklang/undra/server"
+	//for now comment out (because they dont exist)
+	// _ "github.com/tusklang/oat/test"
+	// _ "github.com/tusklang/tusk/test"
+	// _ "github.com/tusklang/undra/test"
 )
 
 func TestAll(t *testing.T) {
