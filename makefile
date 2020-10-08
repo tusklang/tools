@@ -13,6 +13,12 @@ all:
 test: all
 	go test ./test/all_test.go -run ''
 
+.PHONY: clean
+clean:
+	cd ../tusk && $(MAKE) clean
+	cd ../oat && $(MAKE) clean
+	cd ../undra && $(MAKE) clean
+
 .PHONY: tag
 tag:
 	cd ../tusk && git tag $(tag)
