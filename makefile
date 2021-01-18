@@ -1,3 +1,8 @@
+ifneq ($(OS),Windows_NT)
+	#on unix, this must be done
+	SET_GOPATH = GOPATH=$(GOPATH)
+endif
+
 .PHONY: default
 default: test
 
@@ -11,7 +16,7 @@ all:
 
 .PHONY: test
 test: all
-	go test ./test/all_test.go -run ''
+	$(SET_GOPATH) go test ./test/ -v
 
 .PHONY: clean
 clean:
