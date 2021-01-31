@@ -2,10 +2,10 @@ var base = proto {
 
     static var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v'] ;up to base 32
 
-    var convbase = fn(number -> _n, int -> _base) {
+    static var from_b10 = fn(int -> _n, int -> _base) {
 
         ;must fall within this boundary
-        if (_base < 0 || base > len:(base::digits)) panic:("Radix must be 0 <= " + (string -> len:(base::digits)), errnos::INVALIDARG)
+        if (_base < 2 || _base > len:(base::digits)) panic:("Radix must be 0 <= " + (string -> len:(base::digits)), errnos::INVALIDARG)
 
         ;clone the args
         n := clone:(_n)
@@ -26,7 +26,7 @@ var base = proto {
 
         while (n >= 1) {
             cur := n % b
-            b//=16
+            n/=b
             fin = prepend:(fin, cur)
         }
 
@@ -37,5 +37,17 @@ var base = proto {
     
         if (neg) fstr = "-" + fstr
         return fstr
+    }
+
+    static var to_b10 = fn(string -> val, int -> radix) {
+
+        sum := 0
+
+        each (val, k, v) {
+            pow := len:(val) - k - 1
+            sum+=(int -> (string -> v)) * (radix ** pow)
+        }
+
+        return sum
     }
 }

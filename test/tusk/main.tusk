@@ -2,5 +2,5 @@
 ;s tuskstd/crypto
 
 var main = fn() {
-    testing:("helo")
+    log:(base::to_b10:("100101", 2))
 }

@@ -1,5 +1,5 @@
 ;include:
-;s tuskstd/bitutil
+;s tuskstd/crypto
 ;s tuskstd/math
 ;s tuskstd/util/split.tusk
 ;s tuskstd/util/alloc.tusk
@@ -12,7 +12,7 @@ var sha = proto {
     ;repurposed from python to tusk, and made a few small changes
 
     static var ROTL = fn(int -> x, int -> n) {
-        return ((x << n) | (x >> (32 - n))) & 0xFFFFFFFF
+        return ((x << n) | (x >> (32 - n))) & 0xffffffff
     }
 
     static var Ch = fn(int -> x, int -> y, int -> z) return (x & y) ^ (~x & z)
@@ -33,11 +33,9 @@ var sha = proto {
         bytes := ""
 
         each (msg, _, v) {
-            bitarr := bitutil::tobits:(int -> v)
-            cur := ""
-            each (bitarr, _, vv) cur+=(string -> vv)
-            while (len:(cur) < 8) cur = "0" + cur ;force it to be of length 8 at least
-            bytes+=cur
+            bitstr := base::from_b10:(int -> v, 2)
+            while (len:(bitstr) < 8) bitstr = "0" + bitstr ;force it to be of length 8 at least
+            bytes+=bitstr
         }
 
         bits := bytes + "1" ;add the "1" bit
@@ -46,14 +44,10 @@ var sha = proto {
         while (len:(pBits) % 512 != 448) pBits+="0" ;put padding
 
         ;append the original length
-        origlen := bitutil::tobits:(len:(bytes))
-        while (len:(origlen) < 64) origlen = prepend:(origlen, 0) ;force it to be length 64 at least
+        origlen := base::from_b10:(len:(bytes), 2)
+        while (len:(origlen) < 64) origlen = "0" + origlen ;force it to be length 64 at least
 
-        ;make it a binary string
-        origlen_binstr := ""
-        each (origlen, _, v) origlen_binstr+=(string -> v)
-
-        pBits+=origlen_binstr
+        pBits+=origlen
 
         each (split:(pBits, 512), _, c) {
             words := split:(c, 32)
@@ -62,7 +56,7 @@ var sha = proto {
             n := 0
             while (n < 16) {
                 curval := map:(split:(words::(n), 1), fn(_, v) return (int -> v))
-                w::(n) = bitutil::frombits:(curval)
+                w::(n) = base::to_b10:(curval)
                 n++
             }
             while (n < 80) {

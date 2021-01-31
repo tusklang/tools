@@ -2,7 +2,7 @@
 ;r .
 
 var aes = proto {
-    static var new = fn(text -> key) {
+    static var new = fn(string -> key) {
         
     }
 }
