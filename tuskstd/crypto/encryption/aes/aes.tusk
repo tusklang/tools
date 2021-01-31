@@ -1,0 +1,8 @@
+;include:
+;r .
+
+var aes = proto {
+    static var new = fn(text -> key) {
+        
+    }
+}

@@ -1,0 +1,41 @@
+var base = proto {
+
+    static var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v'] ;up to base 32
+
+    var convbase = fn(number -> _n, int -> _base) {
+
+        ;must fall within this boundary
+        if (_base < 0 || base > len:(base::digits)) panic:("Radix must be 0 <= " + (string -> len:(base::digits)), errnos::INVALIDARG)
+
+        ;clone the args
+        n := clone:(_n)
+        b := clone:(_base)
+        ;;;;;;;;;;;;;;;
+
+        neg := false
+
+        if (n < 0) {
+            n = -1 * n
+            neg = true
+        }
+
+        fin := []
+
+        var rem
+        var tmp
+
+        while (n >= 1) {
+            cur := n % b
+            b//=16
+            fin = prepend:(fin, cur)
+        }
+
+        fstr := ""
+
+        each (fin, _, v)
+            fstr+=(base::digits::(v))
+    
+        if (neg) fstr = "-" + fstr
+        return fstr
+    }
+}

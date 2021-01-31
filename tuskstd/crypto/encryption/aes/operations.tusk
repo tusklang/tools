@@ -1,0 +1,21 @@
+;include:
+;r data.tusk
+
+var aes = proto {
+    static var _sub_bytes = fn() {
+
+    }
+
+    static var _shift_rows = fn() {
+        
+    }
+
+    static var _mix_columns = fn() {
+        
+    }
+
+    static var _add_round_key = fn() {
+        
+    }
+
+}
