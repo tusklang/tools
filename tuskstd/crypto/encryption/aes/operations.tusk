@@ -1,21 +1,67 @@
 ;include:
 ;r data.tusk
+;s tuskstd/util/alloc.tusk
 
 var aes = proto {
-    static var _sub_bytes = fn() {
+    static var _sub_bytes = fn(array -> block) {
 
+        ;block is a 4x4 matrix of the plaintext data converted to hex
+
+        each (block, k, v)
+            each (v, kk, vv)
+                block::(k)::(kk) = aes::sbox::(vv)
     }
 
-    static var _shift_rows = fn() {
-        
+    static var _shift_rows = fn(array -> block) {
+
+        each (block, k, v) {
+            var shifted = clone:(v) ;allocate a new array, with the same length as the current row
+
+            i := 0
+            while (i < k) {
+                ;repeat `k` times
+
+                shifted_clone := clone:(shifted) ;clone it, so it won't get mutated when we shift it
+
+                each (shifted_clone, kk, vv)
+                    shifted::((kk + 1) % len:(v)) = vv
+
+                i++
+            }
+
+            block::(k) = shifted
+        }
     }
 
-    static var _mix_columns = fn() {
-        
+    static var _mix_columns = fn(array -> block) {
+
+        mul_matrix := [
+            [2, 3, 1, 1],
+            [1, 2, 3, 1],
+            [1, 1, 2, 3],
+            [3, 1, 1, 2],
+        ]
+
+        ;perform matrix multiplication on each of the columns
+
+        nmatrix := [ ;a new, empty matrix
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ]
+
+        each (block, a, v)
+            each (v, b, _)
+                each (mul_matrix, c, _)
+                    nmatrix::(c)::(b) += (
+                        v::(b) * mul_matrix::(c)::(a)
+                    )
+
+        return nmatrix
     }
 
     static var _add_round_key = fn() {
         
     }
-
 }

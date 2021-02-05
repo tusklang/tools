@@ -3,6 +3,23 @@
 
 var aes = proto {
     static var new = fn(string -> key) {
-        
+        var a = make:(aes)
+        return a
+    }
+
+    var encrypt = fn(string -> plaintext) {
+
+        tmp := [
+                [0, 1, 2, 3],
+                [1, 5, 6, 7],
+                [2, 9, 10, 11],
+                [3, 13, 14, 15],
+            ]
+
+        aes::_sub_bytes:(tmp)
+        aes::_shift_rows:(tmp)
+        tmp = aes::_mix_columns:(tmp)
+
+        log:(tmp)
     }
 }

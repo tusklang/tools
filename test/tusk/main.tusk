@@ -2,5 +2,6 @@
 ;s tuskstd/crypto
 
 var main = fn() {
-    log:(base::to_b10:("100101", 2))
+    a := aes::new:("aaa")
+    a::encrypt:("aaa")
 }
