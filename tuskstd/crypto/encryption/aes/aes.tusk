@@ -9,7 +9,7 @@ var aes = proto {
 
     var encrypt = fn(string -> plaintext) {
 
-        tmp := [
+        tmp := [ ;testing values
                 [0, 1, 2, 3],
                 [1, 5, 6, 7],
                 [2, 9, 10, 11],

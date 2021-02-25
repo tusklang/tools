@@ -61,7 +61,19 @@ var aes = proto {
         return nmatrix
     }
 
-    static var _add_round_key = fn() {
-        
+    static var _add_round_key = fn(array -> block, array -> key) {
+
+        fin := [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ]
+
+        each (block, k, _)
+            each (block::(k), kk, _)
+                fin::(k)::(kk) = block::(k)::(k) ^ key::(k)::(k)
+
+        return fin
     }
 }
