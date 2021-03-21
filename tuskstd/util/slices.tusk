@@ -23,7 +23,7 @@ ovld rmbegin = fn(array -> arr, int -> amt) {
     camt := clone:(amt)
 
     while (arrl >= camt) {
-        removed = prepend:(removed, arr::(arrl))
+        removed = pushfront:(removed, arr::(arrl))
         arrl--
     }
 
@@ -49,7 +49,7 @@ ovld rmend = fn(array -> arr, int -> amt) {
     camt := len:(arr) - clone:(amt) - 1
 
     while (camt >= 0) {
-        removed = prepend:(removed, arr::(camt))
+        removed = pushfront:(removed, arr::(camt))
         camt--
     }
 
@@ -77,7 +77,7 @@ ovld slice = fn(array -> arr, int -> start, int -> end) {
     cend := clone:(end)
 
     while (cstart < cend) {
-        removed = append:(removed, arr::(cstart))
+        removed = pushback:(removed, arr::(cstart))
         cstart++
     }
 

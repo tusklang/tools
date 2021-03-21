@@ -22,7 +22,7 @@ var json = proto {
                 json::(i) == '[' || 
                 json::(i) == ']' ||
                 json::(i) == ':' ||
-                json::(i) == ','   ) tokens = append:(tokens, json::(i))
+                json::(i) == ','   ) tokens = pushback:(tokens, json::(i))
             ;;;;;;;;;;;;;;;;
             else {
 
@@ -70,7 +70,7 @@ var json = proto {
                         i++
                     }
 
-                    tokens = append:(tokens, fin)
+                    tokens = pushback:(tokens, fin)
 
                 } elif (is_digit:(json::(i)) json::(i) == '+' || json::(i) == '-') {
                     ;its a number
@@ -93,19 +93,19 @@ var json = proto {
 					} else n = cur
 
 					numeric := (float -> n) * (float -> (10 ** (int -> scientific)))
-					tokens = append:(tokens, numeric)
+					tokens = pushback:(tokens, numeric)
                 } elif (starts_with:(json, "true")) {
                     ;its a boolean (true)
                     i+=len:("true")
-                    tokens = append:(tokens, true)
+                    tokens = pushback:(tokens, true)
                 } elif (starts_with:(json, "false")) {
                     ;its a boolean (false)
                     i+=len:("false")
-                    tokens = append:(tokens, false)
+                    tokens = pushback:(tokens, false)
                 } elif (starts_with:(json, "undefined")) {
                     ;undefined
                     i+=len:("undefined")
-                    tokens = append:(tokens, undef)
+                    tokens = pushback:(tokens, undef)
                 } elif (is_whitespace:(json::(i))) {
                     i++
                     continue
@@ -133,7 +133,7 @@ var json = proto {
 				if (tokens::(i) == ']') bCnt--
 			}
 
-			val_tokens = append:(val_tokens, tokens::(i))
+			val_tokens = pushback:(val_tokens, tokens::(i))
 
 			i++
 			if (cbCnt == 0 && bCnt == 0) {
@@ -189,7 +189,7 @@ var json = proto {
 			i := 1
 			while (i < len:(tokens) - 1) {
 				curval := json::getval:(tokens, i)
-				fin = append:(fin, json::conv:(curval))
+				fin = pushback:(fin, json::conv:(curval))
 				i++
 			}
 

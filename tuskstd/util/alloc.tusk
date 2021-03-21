@@ -5,7 +5,7 @@ var alloc = fn(int -> length) {
     cl := clone:(length)
 
     while (cl > 0) {
-        ret = append:(ret, 0)
+        ret = pushback:(ret, 0)
         cl--
     }
 

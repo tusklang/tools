@@ -27,7 +27,7 @@ var base = proto {
         while (n >= 1) {
             cur := n % b
             n/=b
-            fin = prepend:(fin, cur)
+            fin = pushfront:(fin, cur)
         }
 
         fstr := ""

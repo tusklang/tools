@@ -17,7 +17,7 @@ ovld repeat = fn(array -> x, int -> _n) {
     while (n > 0) {
 
         each (x, _, v)
-            fin = append:(fin, v)
+            fin = pushback:(fin, v)
 
         n--
     }

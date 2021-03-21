@@ -14,7 +14,7 @@ ovld split = fn(string -> str, int -> amt) {
     chunks := []
 
     each (str, k, v) {
-        if (k % amt == 0) chunks = append:(chunks, "") ;if its divisible by the amt, add a new piece
+        if (k % amt == 0) chunks = pushback:(chunks, "") ;if its divisible by the amt, add a new piece
         chunks::(len:(chunks) - 1)+=v
     }
 
@@ -28,7 +28,7 @@ ovld split = fn(string -> str, string -> del) {
         ret := []
         each (str, _, v)
             ;go through the string, and cur by every char
-            ret = append:(ret, string -> v)
+            ret = pushback:(ret, string -> v)
 
         return ret
     }
@@ -48,7 +48,7 @@ ovld split = fn(string -> str, string -> del) {
         find_sep := false
         if (str::(i) == del::0 && i + n <= m) {
             if (slice:(str, i, i + n) == del) {
-                res = append:(res, slice:(str, last, i - last))
+                res = pushback:(res, slice:(str, last, i - last))
                 i+=n
                 last = i
                 find_sep = true
@@ -57,6 +57,6 @@ ovld split = fn(string -> str, string -> del) {
         if (!find_sep) i++
     }
 
-    res = append:(res, slice:(str, last, m)) ;append the last part
+    res = pushback:(res, slice:(str, last, m)) ;append the last part
     return res
 }

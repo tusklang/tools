@@ -1,7 +1,4 @@
-;include:
-;s tuskstd/crypto
-
 var main = fn() {
-    a := aes::new:("aaa")
-    a::encrypt:("aaa")
+    var a = []
+    a = popback:(a)
 }

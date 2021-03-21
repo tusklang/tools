@@ -1,4 +1,6 @@
 ;include:
+;s tuskstd/util/split.tusk
+;s tuskstd/util/alloc.tusk
 ;r .
 
 var aes = proto {
@@ -7,19 +9,50 @@ var aes = proto {
         return a
     }
 
+    static var _chunk_to_matrix = fn(string -> chunk) {
+
+        ;initialize the matrix
+        var matrix = alloc:(4)
+        each (matrix, k, _)
+            matrix::(k) = alloc:(4)
+        ;;;;;;;;;;;;;;;;;;;;;;
+
+        each (chunk, k, v)
+            matrix::(k % 4)::(k / 4) = int -> v
+
+        return matrix
+    }
+
+    static var _plaintext_to_matrices = fn(string -> plaintext) {
+        chunks := split:(plaintext, 16) ;split in order to form 4x4 matrices (each composing of 16 characters)
+
+        while (len:(chunks::(len:(chunks) - 1)) != 16) chunks::(len:(chunks) - 1)+="z" ;add padding z's if the don't have enough length
+
+        matrices := alloc:(len:(chunks))
+
+        each (chunks, k, v)
+            matrices::(k) = aes::_chunk_to_matrix:(v)
+        return matrices       
+    }
+
+    static var _matrix_to_plaintext = fn(array -> m) {
+        
+    }
+
     var encrypt = fn(string -> plaintext) {
 
-        tmp := [ ;testing values
-                [0, 1, 2, 3],
-                [1, 5, 6, 7],
-                [2, 9, 10, 11],
-                [3, 13, 14, 15],
-            ]
+        bytes := array -> plaintext ;get the bytes of the plaintext
 
-        aes::_sub_bytes:(tmp)
-        aes::_shift_rows:(tmp)
-        tmp = aes::_mix_columns:(tmp)
+        matrices := aes::_plaintext_to_matrices:(plaintext)
 
-        log:(tmp)
+        each (matrices, _, v) {
+            aes::_sub_bytes:(v)
+            aes::_shift_rows:(v)
+            v = aes::_mix_columns:(v)
+
+            log:(v)
+        }
+
+        
     }
 }
